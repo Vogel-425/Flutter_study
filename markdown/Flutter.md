@@ -159,6 +159,16 @@ Slider(
     value:<double>,//現在選択されている値
 ),
 ```
+# モバイルアプリ開発(6/3)
+アラートやダイアログと呼ばれるUIは、必要に応じて画面にひょうじすることができる。  
+表示には、**showDialog**という関数を利用する  
+```dart  
+showDialog(
+    context : <BulidContext>,//ウィジェットのベースとなる
+    builder : <WidgetBuilder>//表示するウィジェットを生成する関数を指定する
+)
+```
+
 
 
 
