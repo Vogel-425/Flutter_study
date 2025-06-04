@@ -167,7 +167,53 @@ showDialog(
     context : <BulidContext>,//ウィジェットのベースとなる
     builder : <WidgetBuilder>//表示するウィジェットを生成する関数を指定する
 )
+```  
+---
+**AlertDialog**
+```dart
+AlertDialog(
+    title:ウィジェット,
+    cntent:ウィジェット
+)
 ```
+---
+
+**actions**  
+AlertDialogに用意されているプロパティ、選択したボタンに応じた処理を作る事ができる  
+```dart
+actions:<widget>[ウィジェットのリスト]
+```
+---
+**then**  
+コールバック関数を指定するメソッド
+```dart
+showDialog(・・・),then<void>(・・処理・・)
+```
+
+
+---
+**Navigator**  
+表示されているアラートダイアログを消す働きをする  
+
+---
+**SimpleDialog**  
+複数の項目から1つを選ぶような入力を作成するクラス  
+```dart
+SimpleDialog(
+    title:ウィジェット,//タイトルのテキストなど
+    children:[ウィジェットのリスト],//選択肢として表示する項目のリスト
+)
+```
+---
+**SimpleDialogOption**  
+SimpleDialogの選択肢の項目として使う専用のクラス  
+```dart
+SimpleDialogOption(
+    child:ウィジェット,//項目内に表示するウィジェット
+    onPressed:・・処理・・,//項目をクリックしたときの処理
+)
+```
+---
 
 
 

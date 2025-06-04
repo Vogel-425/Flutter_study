@@ -75,8 +75,21 @@ class _MyHomePageState extends State<MyHomePage>{
       builder:(BuildContext context)=>AlertDialog(
         //AlaratDialogで contentの内容を表示
         title:Text("Hello!"),
-        content:Text("This is sample."),
-      )
-    );
+        content:const Text("This is sample."),
+        actions:<Widget>[
+          TextButton(
+            child: const Text('Cancel'),
+            onPressed: ()=> Navigator.pop<String>(context, 'Cansel')
+            ),
+            TextButton(
+              child: const Text('ok'),
+              onPressed:()=>Navigator.pop<String>(context, "ok")
+          )
+        ],
+      ),
+    ).then<void>((value)=>resultAlert(value));
+  }
+  void resultAlert(String value){
+    setState((){_message = 'selected: $value';});
   }
  }
