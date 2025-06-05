@@ -214,10 +214,83 @@ SimpleDialogOption(
 )
 ```
 ---
+# モバイルアプリ開発(6/4)
 
+**BottomNavigationBar**  
+下部のバーを表示できるようになる  
+BottomNavigationBarItemというウィジェットを組み込むことで、アイコン表示しクリックして操作できるようになる  
+```dart
+BottomNavigationBar(
+    currentIndex: <int値>,//選択されているインデックス
+    items: <BottomNavigationBarItem>[リスト],//表示する項目
+    onTap: 関数 //バーのアイコンをクリックしたときに呼び出される関数
+                // onTapは void メソッド (int value){・・・・・}の形で定義
+)
+```
+---
+**ListView**  
+リストを表示するためのウィジェット。  
+設定画面などの多数の項目を並べて表示するようなところで用いられる。  
+```dart
+ListView(
+    shrinkWrap: <bool値>,//追加された項目に応じて大きさを自動調整するかどうか
+    padding: <EdgeInsets>,
+    children: <widget>[リスト],
+)
+```
+**ListTile**  
+ListViewで使用するリストを用意する  
+```dart
+ListTile(
+    leading: アイコン指定,//項目の左端に表示するアイコン
+    title: ウィジェット指定,//項目に表示する内容
+    selected: TrueかFalse,//その項目の選択状態、選択されているならTrue
+    onTap: 関数,          //クリックされたときのイベント処理
+    onLongPress: 関数,    //長押しされたときのイベント処理
+)
+```
+---
+**SingleChildScrollView**  
+項目が増えて一つの画面で表示しきれなくなった際に、その長さに応じて自動でスクロール表示できるようにするもの  
+```dart
+SingleChildScrollView(
+    child: ウィジェット //組み込むウィジェットを用意する
+)
+```
+---
+# ルーティング
+**Navigator**  
+- 移動先のウィジェットを追加すると、そのウィジェットに表示を切り替える  
+- 保管されたウィジェットを取り出すと、そのウィジェットに表示を戻す  
+上記の重要な機能がある  
+```dart
+Navigator.push(<BuildContext>,<Route>);//移動先をプッシュする
+```
+```dart
+Navigator.pop(<BulidContext>);//移動をポップする
+```
+まとめると、プッシュすると移動し、ポップすると戻る
 
+---
+**MaterialPageRoute**  
+MaterialPageRouteやPageRouteはRouteのサブクラスである  
+現在の表示や次に移動する画面の情報を記憶し、PageRouteクラスに置き換える働きをする  
 
-
-
-
-
+**テキストによるルーティング**  
+あらかじめルートと表示するウィジェットの関係を定義しておくことで、ナビゲーションの柔軟性を高めることができる。あらかじめていぎするのにはroutesプロパティを用いる  
+```dart
+routes: {
+    //アドレスがpushされたら、対応するウィジェットを表示する
+    'アドレス' : (context) => ウィジェット,
+    'アドレス' : (context) => ウィジェット,
+    必要な分だけこの跡にも続ける
+}
+```
+**PushNamed**  
+routesを利用するときのページ移動に用いるメソッド  
+```dart
+Navigation.PushNamed(
+    <BulidContext>,
+    'アドレス'//String型のアドレスを指定します
+)
+```

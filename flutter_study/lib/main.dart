@@ -2,94 +2,68 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MyApp());
-}//アプリのエントリーポイント、MyAppというウィジェットからアプリをスタートする
+}
 
-// アプリ全体のルートウィジェット
-class MyApp extends StatelessWidget {//statelessWidgetは変化を持たないUI
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(//MaterialAppはアプリの基本的なデザインを提供
+    return MaterialApp(
       title: 'Flutter Demo',
-      home: MyHomePage(),//homeにMyHomePageを指定すると最初に表示する画面が決まる
+      home: MyHomePage(),
     );
   }
 }
-// 最初に表示される画面となる
-class MyHomePage extends StatefulWidget {//StatefulWidgetは変化するデータを扱いたいときに使う
+
+class MyHomePage extends StatefulWidget {
   @override
-  //createStateにより、状態を管理する_MyHomePageStateを作る
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-//状態を持つクラス
-class _MyHomePageState extends State<MyHomePage>{
-  static var _message = 'ok';//変数_messageに"ok"を代入
+class _MyHomePageState extends State<MyHomePage> {
+  static var _message = 'ok';
+  static var _index = 0;
 
   @override
-  //buildメソッドはUiを描画する関数
-  //contextは現在のウィジェットの情報を持つ変数
-  Widget build(BuildContext context){
-    //画面の骨組みを作るウィジェット
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar:AppBar(//画面上部のタイトルバーを表示
-        title:Text('App Name'),
+      appBar: AppBar(
+        title: Text('My App'),
       ),
-      body:Center(//body：画面の中身、Center：中央寄せ
-        child:Column(//Column：ウィジェットを縦に並べる
-          mainAxisAlignment : MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children:<Widget>[
-            Padding(
-              padding:EdgeInsets.all(20.0),
-              child:Text(_message,//_messageの内容を表示
-                style:TextStyle(//フォントサイズやスタイルを指定
-                  fontSize: 32.0,
-                  fontWeight: FontWeight.w400,
-                  fontFamily:"Roboto"),
-              ),
-            ),
-            Padding(padding: EdgeInsets.all(10.0),
-            ),
-            //ボタンの見た目と動作を定義
-            Padding(padding: EdgeInsets.all(10.0),
-              child: ElevatedButton(
-              onPressed: buttonPressed, 
-                child: Text("tap me",
-                style: TextStyle(fontSize: 32.0,
-            color:const Color(0xff000000),
-            fontWeight: FontWeight.w400,
-            fontFamily: "Roboto"),
-            )
-            )
-            ),
-          ],
-        ),
+      body: Center(
+        child: Text(
+          _message,
+          style: const TextStyle(
+            fontSize: 28.0,
+          ),
+        )
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _index,
+        backgroundColor: Colors.lightBlueAccent,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            label: 'Android',
+            icon: Icon(Icons.android,color: Colors.black, size: 50),
+          ),
+          BottomNavigationBarItem(
+            label: 'Favorite',
+            icon: Icon(Icons.favorite,color: Colors.red, size: 50),
+          ),
+          BottomNavigationBarItem(
+            label: 'Home',
+            icon: Icon(Icons.home,color: Colors.white, size: 50),
+          ),
+        ],
+        onTap: tapBottomIcon,
       ),
     );
   }
-  //ボタンが押されたときの動作を定義
-  void buttonPressed(){
-    showDialog(//showDialogでポップアップ表示
-      context : context,
-      builder:(BuildContext context)=>AlertDialog(
-        //AlaratDialogで contentの内容を表示
-        title:Text("Hello!"),
-        content:const Text("This is sample."),
-        actions:<Widget>[
-          TextButton(
-            child: const Text('Cancel'),
-            onPressed: ()=> Navigator.pop<String>(context, 'Cansel')
-            ),
-            TextButton(
-              child: const Text('ok'),
-              onPressed:()=>Navigator.pop<String>(context, "ok")
-          )
-        ],
-      ),
-    ).then<void>((value)=>resultAlert(value));
+
+  void tapBottomIcon(int value) {
+    var items = ['Android', 'Heart', 'Home'];
+    setState(() {
+      _index = value;
+      _message = 'you tapped: "' + items[_index] + '".';
+    });
   }
-  void resultAlert(String value){
-    setState((){_message = 'selected: $value';});
-  }
- }
+}
