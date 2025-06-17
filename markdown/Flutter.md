@@ -294,3 +294,43 @@ Navigation.PushNamed(
     'アドレス'//String型のアドレスを指定します
 )
 ```
+# タブビューとドロワー
+**TabBar**  
+タブの切替ノブの部分を表示するUIウィジェット  
+```dart
+TabBar(
+    controller:<TabController>,
+    tabs:[Tabのリスト],
+),
+```
+---
+**TabBarView**  
+コンテンツとなるもの  
+```dart
+TabBarView(
+    controller:<TabController>,
+    children:[ウィジェットのリスト],
+)
+```
+---
+**TabController**  
+```dart
+TabContorller(
+    //TickerProviderはアニメーションのコールバック呼び出しに関するTickerというクラスを生成する
+    vsync:<TickerProvider>,
+    length:<int値>,
+)
+```
+---
+**Tabクラス**  
+TabBarに表示される各タブのノブ部分のウィジェット  
+```dart
+Tab(text:<String>)
+```
+---
+**Drawerについて**  
+```dart
+Drawer(
+    child:ウィジェット,
+)
+```
